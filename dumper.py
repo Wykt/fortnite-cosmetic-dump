@@ -4,7 +4,8 @@ import os
 import json
 import requests
 
-COSMETIC_API = "https://fortnite-api.com/v2/cosmetics/br?responseOptions=ignore_null"
+FORTNITE_API = "https://fortnite-api.com/v2"
+COSMETIC_ENDPOINT = f"{FORTNITE_API}/cosmetics/br?responseOptions=ignore_null"
 
 
 def create_dump_dir():
@@ -13,7 +14,7 @@ def create_dump_dir():
 
 
 def query_cosmetic_api() -> dict:
-    return requests.get(url=COSMETIC_API).json()
+    return requests.get(url=COSMETIC_ENDPOINT).json()
 
 
 def get_cosmetic_type(cosmetic: dict) -> str:
@@ -28,12 +29,12 @@ def get_cosmetic_variants(cosmetic: dict) -> list:
         return variants
 
     for variant in cosmetic["variants"]:
-        if "type" not in variant:
+        if "channel" not in variant:
             continue
 
-        variant_type = variant["type"]
+        variant_type = variant["channel"]
 
-        if variant_type != "STYLE":
+        if variant_type != "Material" and variant_type != "ClothingColor":
             continue
 
         variant_options = variant["options"]
