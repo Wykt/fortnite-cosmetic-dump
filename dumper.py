@@ -18,7 +18,7 @@ def query_cosmetic_api() -> dict:
 
 
 def get_cosmetic_type(cosmetic: dict) -> str:
-    return cosmetic["type"]["value"]
+    return cosmetic["type"]["backendValue"]
 
 
 # Warning: this only gets variant styles, nothing else.
