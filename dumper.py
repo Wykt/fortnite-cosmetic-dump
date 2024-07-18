@@ -50,7 +50,7 @@ def get_cosmetic_variants(cosmetic: dict) -> list:
 def write_file(cosmetic_dict: Dict[str, list]) -> None:
     for cosmetic_type, cosmetics in cosmetic_dict.items():
         with open(f"./dump/{cosmetic_type}.json", "w") as file:
-            file.write(json.dumps(cosmetics))
+            file.write(json.dumps(cosmetics, separators=(',', ':')))
             file.close()
 
 
